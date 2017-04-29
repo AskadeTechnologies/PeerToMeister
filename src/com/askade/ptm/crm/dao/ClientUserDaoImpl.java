@@ -1,6 +1,6 @@
 package com.askade.ptm.crm.dao;
 
-import com.askade.ptm.crm.model.AppUser;
+import com.askade.ptm.crm.model.ClientUser;
 import org.hibernate.SessionFactory;
 import org.hibernate.procedure.ProcedureCall;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.List;
  * Created by AdrianIonita on 4/29/2017.
  */
 @Repository
-public class AppUserDaoImpl implements AppUserDao {
+public class ClientUserDaoImpl implements ClientUserDao {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -22,40 +22,40 @@ public class AppUserDaoImpl implements AppUserDao {
     private final String sequenceName = "xxptm_users_s";
 
     /**
-     * @param appUser
+     * @param clientUser
      */
     @Override
-    public void addAppUser(AppUser appUser) {
+    public void addClientUser(ClientUser clientUser) {
         ProcedureCall pc = sessionFactory.getCurrentSession().createStoredProcedureCall(this.sequenceName);
         pc.registerParameter(1, BigInteger.class, ParameterMode.OUT);
-        appUser.setUserId((BigInteger)pc.getOutputs().getOutputParameterValue(1));
-        sessionFactory.getCurrentSession().saveOrUpdate(appUser);
+        clientUser.setUserId((BigInteger)pc.getOutputs().getOutputParameterValue(1));
+        sessionFactory.getCurrentSession().saveOrUpdate(clientUser);
     }
 
     /**
      * @return
      */
     @Override
-    public List<AppUser> getAllAppUsers() {
-        return sessionFactory.getCurrentSession().createQuery("from AppUser order by userId desc").list();
+    public List<ClientUser> getAllClientUsers() {
+        return sessionFactory.getCurrentSession().createQuery("from ClientUser order by userId desc").list();
     }
 
     /**
-     * @param appUser
+     * @param clientUser
      * @return
      */
     @Override
-    public AppUser updateAppUser(AppUser appUser) {
-        sessionFactory.getCurrentSession().update(appUser);
-        return appUser;
+    public ClientUser updateClientUser(ClientUser clientUser) {
+        sessionFactory.getCurrentSession().update(clientUser);
+        return clientUser;
     }
 
     /**
-     * @param appUserId
+     * @param clientUserId
      * @return
      */
     @Override
-    public AppUser getAppUser(int appUserId) {
-        return (AppUser) sessionFactory.getCurrentSession().get(AppUser.class, appUserId);
+    public ClientUser getClientUser(int clientUserId) {
+        return (ClientUser) sessionFactory.getCurrentSession().get(ClientUser.class, clientUserId);
     }
 }

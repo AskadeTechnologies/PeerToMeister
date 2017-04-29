@@ -13,7 +13,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "XXPTM_USERS")
-public class AppUser{
+public class ClientUser {
 
     private BigInteger userId;
     private String userName;
@@ -27,8 +27,7 @@ public class AppUser{
     private Date lastUpdateDate;
     private String lastUpdatedBy;
 
-    public AppUser() {
-        dateIn = PeerToMeisterUtils.getCurrentDate();
+    public ClientUser() {
     }
 
     @PrePersist
@@ -158,13 +157,13 @@ public class AppUser{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof AppUser)) return false;
+        if (!(o instanceof ClientUser)) return false;
 
-        AppUser appUser = (AppUser) o;
+        ClientUser clientUser = (ClientUser) o;
 
-        if (getUserName() != null ? !getUserName().equals(appUser.getUserName()) : appUser.getUserName() != null)
+        if (getUserName() != null ? !getUserName().equals(clientUser.getUserName()) : clientUser.getUserName() != null)
             return false;
-        return getSocialMediaId() != null ? getSocialMediaId().equals(appUser.getSocialMediaId()) : appUser.getSocialMediaId() == null;
+        return getSocialMediaId() != null ? getSocialMediaId().equals(clientUser.getSocialMediaId()) : clientUser.getSocialMediaId() == null;
     }
 
     /**
@@ -182,7 +181,7 @@ public class AppUser{
      */
     @Override
     public String toString() {
-        return "AppUser{" +
+        return "ClientUser{" +
                 "userId=" + userId +
                 ", userName='" + userName + '\'' +
                 ", userDescription='" + userDescription + '\'' +
