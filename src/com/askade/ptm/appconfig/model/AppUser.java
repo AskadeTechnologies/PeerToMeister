@@ -11,14 +11,15 @@ import java.util.Set;
 @Table (name = "xxknl_app_users")
 public class AppUser {
 
-    private String userName;
+    private String username;
     private String password;
     private boolean enabled;
-    private Set<AppUserRoles> appUserRoles = new HashSet<AppUserRoles>(0);
+    private Set<AppUserRole> appUserRoles = new HashSet<AppUserRole>(0);
 
-    @Column(name = "user_name", unique = true, nullable = false)
-    public String getUserName() {
-        return userName;
+    @Column(name = "username", unique = true, nullable = false)
+    @Id
+    public String getUsername() {
+        return username;
     }
 
     @Column(name = "password", nullable = false)
@@ -31,13 +32,13 @@ public class AppUser {
         return enabled;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "xxknl_app_users")
-    public Set<AppUserRoles> getAppUserRoles() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "appUser", targetEntity = AppUserRole.class)
+    public Set<AppUserRole> getAppUserRoles() {
         return appUserRoles;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setPassword(String password) {
@@ -48,7 +49,7 @@ public class AppUser {
         this.enabled = enabled;
     }
 
-    public void setAppUserRoles(Set<AppUserRoles> appUserRoles) {
+    public void setAppUserRoles(Set<AppUserRole> appUserRoles) {
         this.appUserRoles = appUserRoles;
     }
 }

@@ -7,12 +7,12 @@ import javax.persistence.*;
  */
 @Entity
 @Table (name = "xxknl_app_user_roles")
-public class AppUserRoles {
+public class AppUserRole {
     private Integer userRoleId;
     private AppUser appUser;
     private String role;
 
-    public AppUserRoles() {
+    public AppUserRole() {
     }
 
     @Id
@@ -22,7 +22,8 @@ public class AppUserRoles {
         return userRoleId;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, targetEntity = AppUser.class)
+    @JoinColumn(name = "username")
     public AppUser getAppUser() {
         return appUser;
     }
